@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/malid/AndroidStudioProjects/LeftMenuBar/app/src/main/res/layout/activity_contact_login.xml" value="0.3625" />
+        <entry key="..\:/Users/malid/AndroidStudioProjects/LeftMenuBar/app/src/main/res/layout/activity_dashboard_login.xml" value="0.3625" />
+        <entry key="..\:/Users/malid/AndroidStudioProjects/LeftMenuBar/app/src/main/res/layout/activity_login.xml" value="0.25" />
+        <entry key="..\:/Users/malid/AndroidStudioProjects/LeftMenuBar/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/malid/AndroidStudioProjects/LeftMenuBar/app/src/main/res/layout/activity_main2.xml" value="0.3625" />
+        <entry key="..\:/Users/malid/AndroidStudioProjects/LeftMenuBar/app/src/main/res/layout/activity_map_login.xml" value="0.3625" />
+        <entry key="..\:/Users/malid/AndroidStudioProjects/LeftMenuBar/app/src/main/res/layout/activity_maps_login.xml" value="0.18697916666666667" />
+        <entry key="..\:/Users/malid/AndroidStudioProjects/LeftMenuBar/app/src/main/res/layout/activity_settings_login.xml" value="0.33" />
+        <entry key="..\:/Users/malid/AndroidStudioProjects/LeftMenuBar/app/src/main/res/layout/activity_teste.xml" value="0.3625" />
+        <entry key="..\:/Users/malid/AndroidStudioProjects/LeftMenuBar/app/src/main/res/layout/fragment_contact.xml" value="0.3625" />
+        <entry key="..\:/Users/malid/AndroidStudioProjects/LeftMenuBar/app/src/main/res/layout/fragment_dashboard_login.xml" value="0.3625" />
+        <entry key="..\:/Users/malid/AndroidStudioProjects/LeftMenuBar/app/src/main/res/layout/fragment_login.xml" value="0.3625" />
+        <entry key="..\:/Users/malid/AndroidStudioProjects/LeftMenuBar/app/src/main/res/layout/fragment_map_login.xml" value="0.18541666666666667" />
+        <entry key="..\:/Users/malid/AndroidStudioProjects/LeftMenuBar/app/src/main/res/layout/fragment_maps_login.xml" value="0.18697916666666667" />
+        <entry key="..\:/Users/malid/AndroidStudioProjects/LeftMenuBar/app/src/main/res/layout/fragment_register.xml" value="0.3163265306122449" />
+        <entry key="..\:/Users/malid/AndroidStudioProjects/LeftMenuBar/app/src/main/res/layout/nav_header.xml" value="0.3625" />
+        <entry key="..\:/Users/malid/AndroidStudioProjects/LeftMenuBar/app/src/main/res/layout/nav_header_Login.xml" value="0.15942028985507245" />
+        <entry key="..\:/Users/malid/AndroidStudioProjects/LeftMenuBar/app/src/main/res/layout/nav_header_login.xml" value="0.33" />
+        <entry key="..\:/Users/malid/AndroidStudioProjects/LeftMenuBar/app/src/main/res/menu/drawer_menu.xml" value="0.3625" />
+        <entry key="..\:/Users/malid/AndroidStudioProjects/LeftMenuBar/app/src/main/res/menu/drawer_menu_login.xml" value="0.3625" />
+        <entry key="..\:/Users/malid/AndroidStudioProjects/MyApplication/app/src/main/res/layout/activity_main.xml" value="0.14722222222222223" />
+        <entry key="..\:/Users/malid/AndroidStudioProjects/MyApplication/app/src/main/res/layout/fragment_contact.xml" value="0.18541666666666667" />
+        <entry key="..\:/Users/malid/AndroidStudioProjects/MyApplication/app/src/main/res/layout/fragment_login.xml" value="0.18541666666666667" />
+        <entry key="..\:/Users/malid/AndroidStudioProjects/MyApplication/app/src/main/res/layout/fragment_message.xml" value="0.18541666666666667" />
+        <entry key="..\:/Users/malid/AndroidStudioProjects/MyApplication/app/src/main/res/layout/fragment_register.xml" value="0.18541666666666667" />
+        <entry key="..\:/Users/malid/AndroidStudioProjects/MyApplication/app/src/main/res/layout/nav_header.xml" value="0.14722222222222223" />
+        <entry key="..\:/Users/malid/AndroidStudioProjects/MyApplication/app/src/main/res/menu/drawer_menu.xml" value="0.3625" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
