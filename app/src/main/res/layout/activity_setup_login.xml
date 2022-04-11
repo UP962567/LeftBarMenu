@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/color_bg"
-    >
+    tools:context=".LoginFiles.LoginMenuItem.SetupLogin">
+
 
     <androidx.cardview.widget.CardView
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="10dp"
+        android:layout_marginStart="402dp"
+        android:layout_marginEnd="411dp"
+        android:layout_marginBottom="721dp"
         app:cardCornerRadius="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,146 +22,136 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:background="@color/background"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/background">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/PROFILEprofile_image"
+                android:id="@+id/profile_image"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
+                android:layout_marginTop="20dp"
                 android:src="@drawable/profile"
                 app:civ_border_color="#FF000000"
                 app:civ_border_width="2dp"
-                android:layout_marginTop="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
 
             <EditText
-                android:id="@+id/PROFILEinputUsername"
-                android:clickable="false"
-                android:cursorVisible="false"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
+                android:id="@+id/inputUsername"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:ems="10"
-                android:textColor="@color/white"
-                android:inputType="textPersonName"
-                android:minHeight="48dp"
                 android:hint="@string/username"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"
+                android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/PROFILEprofile_image"
+                app:layout_constraintTop_toBottomOf="@+id/profile_image"
                 tools:ignore="Autofill" />
 
             <EditText
-                android:id="@+id/PROFILEinputFullName"
+                android:id="@+id/inputFullName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:ems="10"
-                android:textColor="@color/white"
-                android:inputType="textPersonName"
-                android:minHeight="48dp"
                 android:hint="@string/full_name"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/PROFILEinputUsername"
-                tools:ignore="Autofill" />
-
-            <EditText
-                android:id="@+id/PROFILEinputCountry"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:ems="10"
                 android:inputType="textPersonName"
-                android:textColor="@color/white"
                 android:minHeight="48dp"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/inputUsername"
+                tools:ignore="Autofill" />
+
+            <EditText
+                android:id="@+id/inputCountry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:ems="10"
                 android:hint="@string/country"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/PROFILEinputFullName"
-                tools:ignore="Autofill" />
-
-            <EditText
-                android:id="@+id/PROFILEinputNumber"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:ems="10"
-                android:inputType="numberDecimal"
+                android:inputType="textPersonName"
                 android:minHeight="48dp"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/PROFILEinputCountry"
+                app:layout_constraintTop_toBottomOf="@+id/inputFullName"
+                tools:ignore="Autofill" />
+
+            <EditText
+                android:id="@+id/inputNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:ems="10"
                 android:hint="@string/number"
-                tools:ignore="Autofill" />
-
-            <EditText
-                android:id="@+id/PROFILEaccessLevel"
-                android:clickable="false"
-                android:cursorVisible="false"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:ems="10"
                 android:inputType="numberDecimal"
                 android:minHeight="48dp"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/PROFILEinputNumber"
-                android:hint="LEVEL"
+                app:layout_constraintTop_toBottomOf="@+id/inputCountry"
                 tools:ignore="Autofill" />
 
+            <CheckBox
+                android:id="@+id/checkBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:checked="true"
+                android:text="@string/terms_conditions"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/radioGrp" />
 
             <Button
-                android:id="@+id/PROFILEbuttonSetUp"
+                android:id="@+id/buttonSetUp"
                 android:layout_width="250dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="20dp"
-                android:text="@string/update_information"
                 android:backgroundTint="@color/teal_200"
+                android:text="@string/setup_account"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/PROFILEradioGrp" />
+                app:layout_constraintTop_toBottomOf="@+id/checkBox" />
 
             <RadioGroup
-                android:id="@+id/PROFILEradioGrp"
+                android:id="@+id/radioGrp"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingTop="0dp"
                 android:paddingLeft="80dp"
+                android:paddingTop="0dp"
                 android:paddingRight="80dp"
-                app:layout_constraintTop_toBottomOf="@+id/PROFILEaccessLevel"
+                app:layout_constraintTop_toBottomOf="@+id/inputNumber"
                 tools:ignore="MissingConstraints">
+
                 <RadioButton
-                    android:id="@+id/PROFILEradioM"
+                    android:id="@+id/radioM"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
-                    android:checked="true"
                     android:layout_weight="1"
-                    android:textSize="14sp"
+                    android:checked="true"
                     android:text="@string/male"
+                    android:textSize="14sp"
                     tools:ignore="RtlHardcoded" />
+
                 <RadioButton
-                    android:id="@+id/PROFILEradioF"
+                    android:id="@+id/radioF"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
-                    android:checked="false"
                     android:layout_weight="1"
-                    android:textSize="14sp"
+                    android:checked="false"
                     android:text="@string/female"
+                    android:textSize="14sp"
                     tools:ignore="RtlHardcoded" />
             </RadioGroup>
 

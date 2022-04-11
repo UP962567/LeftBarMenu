@@ -3,26 +3,41 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/malid/AndroidStudioProjects/LeftMenuBar/app/src/main/res/drawable-v24/ic_like.xml" value="0.195" />
+        <entry key="..\:/Users/malid/AndroidStudioProjects/LeftMenuBar/app/src/main/res/drawable-v24/ic_profile.xml" value="0.213" />
+        <entry key="..\:/Users/malid/AndroidStudioProjects/LeftMenuBar/app/src/main/res/drawable-v24/ic_send.xml" value="0.2735" />
+        <entry key="..\:/Users/malid/AndroidStudioProjects/LeftMenuBar/app/src/main/res/drawable/btn_perform.xml" value="0.2735" />
         <entry key="..\:/Users/malid/AndroidStudioProjects/LeftMenuBar/app/src/main/res/layout/activity_contact_login.xml" value="0.3625" />
         <entry key="..\:/Users/malid/AndroidStudioProjects/LeftMenuBar/app/src/main/res/layout/activity_dashboard_login.xml" value="0.3625" />
+        <entry key="..\:/Users/malid/AndroidStudioProjects/LeftMenuBar/app/src/main/res/layout/activity_find_friend_login.xml" value="0.3625" />
+        <entry key="..\:/Users/malid/AndroidStudioProjects/LeftMenuBar/app/src/main/res/layout/activity_find_friend_porfile_login.xml" value="0.3625" />
         <entry key="..\:/Users/malid/AndroidStudioProjects/LeftMenuBar/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/Users/malid/AndroidStudioProjects/LeftMenuBar/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/malid/AndroidStudioProjects/LeftMenuBar/app/src/main/res/layout/activity_main2.xml" value="0.3625" />
         <entry key="..\:/Users/malid/AndroidStudioProjects/LeftMenuBar/app/src/main/res/layout/activity_map_login.xml" value="0.3625" />
         <entry key="..\:/Users/malid/AndroidStudioProjects/LeftMenuBar/app/src/main/res/layout/activity_maps_login.xml" value="0.18697916666666667" />
+        <entry key="..\:/Users/malid/AndroidStudioProjects/LeftMenuBar/app/src/main/res/layout/activity_news_login.xml" value="0.3625" />
         <entry key="..\:/Users/malid/AndroidStudioProjects/LeftMenuBar/app/src/main/res/layout/activity_settings_login.xml" value="0.33" />
+        <entry key="..\:/Users/malid/AndroidStudioProjects/LeftMenuBar/app/src/main/res/layout/activity_setup_login.xml" value="0.21" />
         <entry key="..\:/Users/malid/AndroidStudioProjects/LeftMenuBar/app/src/main/res/layout/activity_teste.xml" value="0.3625" />
+        <entry key="..\:/Users/malid/AndroidStudioProjects/LeftMenuBar/app/src/main/res/layout/activity_your_friend_login.xml" value="0.18697916666666667" />
+        <entry key="..\:/Users/malid/AndroidStudioProjects/LeftMenuBar/app/src/main/res/layout/app_bar.xml" value="0.3625" />
         <entry key="..\:/Users/malid/AndroidStudioProjects/LeftMenuBar/app/src/main/res/layout/fragment_contact.xml" value="0.3625" />
         <entry key="..\:/Users/malid/AndroidStudioProjects/LeftMenuBar/app/src/main/res/layout/fragment_dashboard_login.xml" value="0.3625" />
         <entry key="..\:/Users/malid/AndroidStudioProjects/LeftMenuBar/app/src/main/res/layout/fragment_login.xml" value="0.3625" />
         <entry key="..\:/Users/malid/AndroidStudioProjects/LeftMenuBar/app/src/main/res/layout/fragment_map_login.xml" value="0.18541666666666667" />
         <entry key="..\:/Users/malid/AndroidStudioProjects/LeftMenuBar/app/src/main/res/layout/fragment_maps_login.xml" value="0.18697916666666667" />
         <entry key="..\:/Users/malid/AndroidStudioProjects/LeftMenuBar/app/src/main/res/layout/fragment_register.xml" value="0.3163265306122449" />
+        <entry key="..\:/Users/malid/AndroidStudioProjects/LeftMenuBar/app/src/main/res/layout/fragment_set_up.xml" value="0.20572916666666666" />
         <entry key="..\:/Users/malid/AndroidStudioProjects/LeftMenuBar/app/src/main/res/layout/nav_header.xml" value="0.3625" />
         <entry key="..\:/Users/malid/AndroidStudioProjects/LeftMenuBar/app/src/main/res/layout/nav_header_Login.xml" value="0.15942028985507245" />
         <entry key="..\:/Users/malid/AndroidStudioProjects/LeftMenuBar/app/src/main/res/layout/nav_header_login.xml" value="0.33" />
+        <entry key="..\:/Users/malid/AndroidStudioProjects/LeftMenuBar/app/src/main/res/layout/single_view_find_friends.xml" value="0.3625" />
+        <entry key="..\:/Users/malid/AndroidStudioProjects/LeftMenuBar/app/src/main/res/layout/single_view_posting.xml" value="0.3625" />
+        <entry key="..\:/Users/malid/AndroidStudioProjects/LeftMenuBar/app/src/main/res/layout/single_view_your_friend.xml" value="0.18697916666666667" />
         <entry key="..\:/Users/malid/AndroidStudioProjects/LeftMenuBar/app/src/main/res/menu/drawer_menu.xml" value="0.3625" />
         <entry key="..\:/Users/malid/AndroidStudioProjects/LeftMenuBar/app/src/main/res/menu/drawer_menu_login.xml" value="0.3625" />
+        <entry key="..\:/Users/malid/AndroidStudioProjects/LeftMenuBar/app/src/main/res/menu/search_menu.xml" value="0.3625" />
         <entry key="..\:/Users/malid/AndroidStudioProjects/MyApplication/app/src/main/res/layout/activity_main.xml" value="0.14722222222222223" />
         <entry key="..\:/Users/malid/AndroidStudioProjects/MyApplication/app/src/main/res/layout/fragment_contact.xml" value="0.18541666666666667" />
         <entry key="..\:/Users/malid/AndroidStudioProjects/MyApplication/app/src/main/res/layout/fragment_login.xml" value="0.18541666666666667" />

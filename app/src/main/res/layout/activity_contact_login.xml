@@ -1,172 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/color_bg"
 
     >
 
-    <TextView
-        android:id="@+id/pageContact_login"
-        android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginRight="30dp"
-        android:text="Contact Login"
-        android:textColor="@color/white"
-        android:textSize="50dp"
+    <androidx.cardview.widget.CardView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="10dp"
+        app:cardCornerRadius="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-
-        />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_marginEnd="250dp"
-        android:layout_marginTop="150dp"
-
-        >
-
-        <TextView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginRight="30dp"
-            android:clickable="false"
-            android:cursorVisible="false"
-
-            android:ems="10"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:hint=""
-
-            android:inputType=""
-            android:text="Your Username: "
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-
-            />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginRight="30dp"
-            android:ems="10"
-            android:hint="Your header: "
-            android:inputType="textPersonName"
-            android:text=""
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-
-            />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginRight="30dp"
-            android:ems="10"
-            android:hint="Your Message: "
-            android:inputType="textPersonName"
-            android:text=""
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-
-            />
+            android:background="@color/background"
+            android:layout_height="match_parent">
 
 
-
-
-    </LinearLayout>
-
-
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_marginLeft="120dp"
-        android:layout_marginTop="150dp"
-
-
-        >
-
-
-
-        <EditText
-            android:id="@+id/emailContact_login"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginRight="30dp"
-            android:clickable="false"
-            android:cursorVisible="false"
-
-            android:ems="10"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:hint=""
-
-            android:inputType="textPersonName"
-            android:text=""
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-
-            />
-
-        <EditText
-            android:id="@+id/aboutContact_login"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginRight="30dp"
-            android:ems="10"
-            android:hint="About what are you writing to us?"
-            android:inputType="textPersonName"
-            android:text=""
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-
-            />
-
-        <EditText
-            android:id="@+id/messageContact_login"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginRight="30dp"
-            android:ems="10"
-            android:hint="Enter your message"
-            android:inputType="textPersonName"
-            android:text=""
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-
-            />
-
-            <Button
-                android:id="@+id/sendButtonContact_login"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginLeft="50dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginRight="50dp"
-                android:background="@color/black"
-                android:text="Send"
+            <EditText
+                android:id="@+id/profile_image"
+                android:layout_width="302dp"
+                android:layout_height="82dp"
+                android:layout_marginTop="64dp"
+                android:gravity="center"
+                android:text="Contact Us"
                 android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:textSize="25dp" />
+                android:textSize="35dp"
+                android:textStyle="bold"
+                app:civ_border_color="#FF000000"
+                app:civ_border_width="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    </LinearLayout>
+            <EditText
+                android:id="@+id/inputEmail"
+                android:layout_width="319dp"
+                android:layout_height="44dp"
+                android:layout_marginTop="40dp"
+                android:ems="10"
+                android:text="support@ma-dy.com"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profile_image"
+                tools:ignore="Autofill" />
 
-</RelativeLayout>
+            <EditText
+                android:id="@+id/inputAbout"
+                android:layout_width="319dp"
+                android:layout_height="43dp"
+                android:layout_marginTop="20dp"
+                android:ems="10"
+                android:text="Portsmouth, United Kingdom"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/inputEmail"
+                tools:ignore="Autofill" />
+
+            <EditText
+                android:id="@+id/inputCountry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:textColor="@color/white"
+                android:minHeight="48dp"
+                android:text="More Soon!"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/inputAbout"
+                tools:ignore="Autofill" />
+
+
+
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

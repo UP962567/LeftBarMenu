@@ -3,14 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.LeftMenuBar">
 
-    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
-
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -18,32 +10,35 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
-
-        <!--
-             TODO: Before you run your application, you need a Google Maps API key.
-
-             To get one, follow the directions here:
-
-                https://developers.google.com/maps/documentation/android-sdk/get-api-key
-
-             Once you have your API key (it starts with "AIza"), define a new property in your
-             project's local.properties file (e.g. MAPS_API_KEY=Aiza...), and replace the
-             "YOUR_API_KEY" string in this file with "${MAPS_API_KEY}".
-        -->
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version"
-            />
-
-        <uses-library
-            android:name="org.apache.http.legacy"
-            android:required="false"
-            />
-
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyD44riXAOyCauWZeUk3ldx0lv4-wff49us" />
-
+        <activity
+            android:name=".LoginFiles.LoginMenuItem.ChatActivity"
+            android:exported="false"
+            tools:ignore="Instantiatable" />
+        <activity
+            android:name=".LoginFiles.LoginMenuItem.YourFriendLogin"
+            android:exported="false"
+            tools:ignore="Instantiatable" />
+        <activity
+            android:name=".MenuItems.ForgotPassFragment"
+            android:exported="false" />
+        <activity
+            android:name=".LoginFiles.LoginMenuItem.FindFriendPorfileLogin"
+            android:exported="false" />
+        <activity
+            android:name=".LoginFiles.LoginMenuItem.FindFriendLogin"
+            android:exported="false"
+            tools:ignore="Instantiatable" />
+        <activity
+            android:name=".LoginFiles.Admin.CreateUserAdmin"
+            android:exported="false"
+            tools:ignore="Instantiatable" />
+        <activity
+            android:name=".LoginFiles.LoginMenuItem.NewsLogin"
+            android:exported="false"
+            tools:ignore="Instantiatable" />
+        <activity
+            android:name=".LoginFiles.LoginMenuItem.SetupLogin"
+            android:exported="false" />
         <activity
             android:name=".LoginFiles.LoginMenuItem.ContactLogin"
             android:exported="false"

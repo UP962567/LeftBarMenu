@@ -1,5 +1,7 @@
 package com.example.LeftMenuBar.MenuItems;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.LayoutInflater;
@@ -14,20 +16,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.LeftMenuBar.LoginFiles.LoginMenuItem.SetupLogin;
 import com.example.LeftMenuBar.R;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class RegisterFragment extends Fragment implements View.OnClickListener {
 
     TextView pagename1;
-    EditText emailRegister1,numberRegister1,usernameRegister1,passwordRegister1,
-            RepasswordRegister1,fullNameRegister1,countryNameRegister1;
+    EditText emailRegister1,passwordRegister1, RepasswordRegister1;
     Button register1;
+
+    FirebaseAuth mAuth;
+    ProgressDialog mLoadingBar;
 
     @Nullable
     @Override
@@ -38,92 +38,67 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
 
         View view = inflater.inflate(R.layout.fragment_register, container, false);
 
+        mAuth = FirebaseAuth.getInstance();
+        mLoadingBar = new ProgressDialog(getContext());
+
 
         pagename1 = (TextView) view.findViewById(R.id.pageRegister);
         emailRegister1 = (EditText) view.findViewById(R.id.emailRegister);
-        numberRegister1 = (EditText) view.findViewById(R.id.numberRegister);
-        usernameRegister1 = (EditText) view.findViewById(R.id.usernameRegister);
         passwordRegister1 = (EditText) view.findViewById(R.id.passwordRegister);
         RepasswordRegister1 = (EditText) view.findViewById(R.id.RepasswordRegister);
-        fullNameRegister1 = (EditText) view.findViewById(R.id.fullNameRegister);
-        countryNameRegister1 = (EditText) view.findViewById(R.id.countryNameRegister);
 
         register1 = (Button) view.findViewById(R.id.registerButtonRegister);
         register1.setOnClickListener(this);
 
-
         return view;
     }
 
+    private void RegistrationCall() {
+        String pass = passwordRegister1.getText().toString();
+        String repass = RepasswordRegister1.getText().toString();
+        String email = emailRegister1.getText().toString();
+
+        if(email.isEmpty() || !email.contains("@")){
+            showError(emailRegister1, "Email is not valid!");
+        }  else if (pass.isEmpty() || pass.length()<5){
+            showError(passwordRegister1, "Password mast be more then 5 characters");
+        } else if (!repass.equals(pass)){
+            showError(RepasswordRegister1, "Password did not match!");
+        } else {
+            mLoadingBar.setTitle("Registration");
+            mLoadingBar.setMessage("Please wait!");
+            mLoadingBar.setCanceledOnTouchOutside(false);
+            mLoadingBar.show();
+
+            mAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    mLoadingBar.dismiss();
+                    Toast.makeText(getContext(), "Registration is Successful", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getContext(), SetupLogin.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                } else {
+                    mLoadingBar.dismiss();
+                    Toast.makeText(getContext(), "Registration is Failed", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
+    }
+
+    private void showError(EditText til, String s) {
+        til.setError(s);
+        til.requestFocus();
+    }
+
     @Override
-    public void onClick(View v) {
-
-        Connection conn = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-
-        switch(v.getId()){
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.registerButtonRegister:
-                try {
-                    Class.forName("com.mysql.jdbc.Driver");
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                    Toast.makeText(getActivity(), (CharSequence) e, Toast.LENGTH_SHORT).show();
-                } try {
-                    String user = usernameRegister1.getText().toString();
-                    String pass = passwordRegister1.getText().toString();
-                    String repass = RepasswordRegister1.getText().toString();
-                    String country = countryNameRegister1.getText().toString();
-                    String number = numberRegister1.getText().toString();
-                    String fullname = fullNameRegister1.getText().toString();
-                    String email = emailRegister1.getText().toString();
-                    conn = DriverManager.getConnection("jdbc:mysql://62.108.35.72:3306/CarPollution?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC","java","m1a2l3i4Q%i6");
-                    ps=conn.prepareStatement("insert into user values(ID,?,?,?,?,?,?)");
-                ps.setString(1,user);
-                ps.setString(2,pass);
-                ps.setString(3,country);
-                ps.setString(4,number);
-                ps.setString(5,email);
-                ps.setString(6,fullname);
-                    if(user.isEmpty() || pass.isEmpty() || country.isEmpty() || number.isEmpty() || email.isEmpty() || fullname.isEmpty()) {
-                        mss1();
-                    } else if(pass.equalsIgnoreCase(repass)) {
-                        ps.executeUpdate();
-                        mss2();
-                    } else if(repass == pass) {
-                        mss3();
-                    }
-                } catch (SQLException e1) {
-                    e1.printStackTrace();
-                } finally {
-                if (rs != null) {
-                    try {
-                        rs.close();
-                    } catch (SQLException e) { /* Ignored */}
-                }
-                if (ps != null) {
-                    try {
-                        ps.close();
-                    } catch (SQLException e) { /* Ignored */}
-                }
-                if (conn != null) {
-                    try {
-                        conn.close();
-                    } catch (SQLException e) { /* Ignored */}
-                }
-            }
+                RegistrationCall();
+                break;
+            case R.id.registrerButtonLogin:
                 break;
         }
-    }
-
-
-    public void mss1(){
-        Toast.makeText(getActivity(), "Please fill of the fields! ", Toast.LENGTH_SHORT).show();
-    }
-    public void mss2(){
-        Toast.makeText(getActivity(), "Data Registered Successfully", Toast.LENGTH_SHORT).show();
-    }
-    public void mss3(){
-        Toast.makeText(getActivity(), "Password did not match", Toast.LENGTH_SHORT).show();
     }
 }

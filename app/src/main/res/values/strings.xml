@@ -7,4 +7,38 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_maps_login">MapsLogin</string>
 
+    <string name="enter_your_email">Enter Your Email</string>
+    <string name="enter_your_password">Enter your Password</string>
+    <string name="login_page">Login Page</string>
+    <string name="new_user_create_account_here">New User? Create account here!</string>
+    <string name="login">Login</string>
+    <string name="registration_page">Registration Page</string>
+    <string name="where_are_you_from">Where are you from?</string>
+    <string name="enter_your_ful_name">Enter your ful name</string>
+    <string name="register">Register</string>
+    <string name="existing_account_click_me_to_go_to_login_page">Existing account? Click me to go to login page</string>
+    <string name="add_image">Add Image</string>
+    <string name="username">Username</string>
+    <string name="full_name">Full Name</string>
+    <string name="country">Country</string>
+    <string name="number">Number</string>
+    <string name="terms_conditions">Do you accept out terms and conditions?</string>
+    <string name="setup_account">Setup Account</string>
+    <string name="female">Female</string>
+    <string name="male">Male</string>
+    <string name="write_something_here">Write Something Here</string>
+    <string name="home">Home</string>
+    <string name="profile">Profile</string>
+    <string name="friends">Friends</string>
+    <string name="add_friend">Add Friend</string>
+    <string name="chat">Chat</string>
+    <string name="logout">Logout</string>
+    <string name="username_header">Username Header</string>
+    <string name="_0hs_ago">0hs ago</string>
+    <string name="this_is_post">This is Post</string>
+    <string name="like">Like!!!</string>
+    <string name="comment">Comment</string>
+    <string name="update_information">Update Information</string>
+    <string name="search">Search</string>
+
 </resources>

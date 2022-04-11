@@ -7,31 +7,41 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.LeftMenuBar.Utils.DatabaseCodes;
-import com.example.LeftMenuBar.Utils.UserLogin;
 import com.example.LeftMenuBar.R;
+import com.example.LeftMenuBar.Utils.UserLogin;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import de.hdodenhof.circleimageview.CircleImageView;
 
-public class SettingsLogin extends Fragment implements View.OnClickListener {
+public class SettingsLogin extends Fragment {
 
     static UserLogin U = new UserLogin();
-    EditText emailSettingLogin1,numberSettingLogin1,usernameSettingLogin1,passwordSettingLogin1,
-            RepasswordSettingLogin1,fullNameSettingLogin1,countrySettingLogin1;
-    Button registerButtonRegister;
+
+    CircleImageView profileImage;
+    EditText inputUsername1, inputFullName1, inputCountry1, inputNumber1, inputAccessLevel;
+    Button button;
+    RadioGroup radioGrp1;
+    RadioButton radioM1 , radioF1;
 
 
-
+    FirebaseAuth mAuth;
+    FirebaseUser mUser;
+    DatabaseReference mRef;
 
     @Nullable
     @Override
@@ -40,121 +50,70 @@ public class SettingsLogin extends Fragment implements View.OnClickListener {
         StrictMode.setThreadPolicy(policy);
         View view = inflater.inflate(R.layout.activity_settings_login, container, false);
 
-        new DatabaseCodes.getLoginInofrmation().getLoginInofrmation();
-
-        emailSettingLogin1 = (EditText) view.findViewById(R.id.emailSettingLogin);
-        numberSettingLogin1 = (EditText) view.findViewById(R.id.numberSettingLogin);
-        usernameSettingLogin1 = (EditText) view.findViewById(R.id.usernameSettingLogin);
-        passwordSettingLogin1 = (EditText) view.findViewById(R.id.passwordSettingLogin);
-        RepasswordSettingLogin1 = (EditText) view.findViewById(R.id.RepasswordSettingLogin);
-        fullNameSettingLogin1 = (EditText) view.findViewById(R.id.fullNameSettingLogin);
-        countrySettingLogin1 = (EditText) view.findViewById(R.id.countrySettingLogin);
-
-        emailSettingLogin1.setText(U.getLoginEmail());
-        numberSettingLogin1.setText(U.getLoginNumber());
-        usernameSettingLogin1.setText(U.getLoginUsername());
-        passwordSettingLogin1.setText(U.getLoginPassword());
-        RepasswordSettingLogin1.setText(U.getLoginPassword());
-        fullNameSettingLogin1.setText(U.getLoginFullname());
-        countrySettingLogin1.setText(U.getLoginCountry());
+        profileImage = view.findViewById(R.id.PROFILEprofile_image);
+        inputUsername1 = view.findViewById(R.id.PROFILEinputUsername);
+        inputUsername1.setOnClickListener(view1 -> showError(inputUsername1, "Not allow to change!"));
+        inputFullName1 = view.findViewById(R.id.PROFILEinputFullName);
+        inputCountry1 = view.findViewById(R.id.PROFILEinputCountry);
+        inputNumber1 = view.findViewById(R.id.PROFILEinputNumber);
+        inputAccessLevel = view.findViewById(R.id.PROFILEaccessLevel);
+        inputAccessLevel.setOnClickListener(view1 -> showError(inputAccessLevel, "Not allow to change!"));
+        button = view.findViewById(R.id.PROFILEbuttonSetUp);
+        radioM1 = view.findViewById(R.id.PROFILEradioM);
+        radioF1 = view.findViewById(R.id.PROFILEradioF);
+        radioGrp1 = view.findViewById(R.id.PROFILEradioGrp);
 
 
+        mAuth = FirebaseAuth.getInstance();
+        mUser = mAuth.getCurrentUser();
+        mRef = FirebaseDatabase.getInstance().getReference().child("Users");
 
-        registerButtonRegister = (Button) view.findViewById(R.id.updateButtonSettings);
-        registerButtonRegister.setOnClickListener(this);
 
 
+        mRef.child(mUser.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    String profileImageURL = snapshot.child("profileImage").getValue().toString();
+                    String country = snapshot.child("country").getValue().toString();
+                    String phone = snapshot.child("phone").getValue().toString();
+                    String username = snapshot.child("username").getValue().toString();
+                    String fullname = snapshot.child("fullName").getValue().toString();
+                    String gender = snapshot.child("gender").getValue().toString();
+                    String level = snapshot.child("accessLevel").getValue().toString();
+
+                    Picasso.get().load(profileImageURL).into(profileImage);
+                    inputCountry1.setText(country);
+                    inputNumber1.setText(phone);
+                    inputUsername1.setText(username);
+                    inputFullName1.setText(fullname);
+                    inputAccessLevel.setText(level);
+                    if (gender == 2131231137+"") {
+                        radioM1.setChecked(true);
+                        radioF1.setChecked(false);
+                    } else {
+                        radioM1.setChecked(false);
+                        radioF1.setChecked(true);
+                    }
+
+
+                } else {
+                    Toast.makeText(getContext(), "Data do not exist!", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getContext(), "" + error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
         return view;
     }
 
-    @Override
-    public void onClick(View v) {
-        switch(v.getId()){
-            case R.id.updateButtonSettings:
-                new SettingsFragmentDB().SettingsFragmentDB();
-                new DatabaseCodes.getLoginInofrmation().getLoginInofrmation();
-        }
+    private void showError(EditText til, String s) {
+        til.setError(s);
+        til.requestFocus();
     }
-
-    class SettingsFragmentDB {
-
-        public void SettingsFragmentDB() {
-            Connection conn = null;
-            PreparedStatement ps = null;
-            ResultSet rs = null;
-            try {
-                Class.forName("com.mysql.jdbc.Driver");
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-                Toast.makeText(getActivity(), (CharSequence) e, Toast.LENGTH_SHORT).show();
-            } try {
-                String user = usernameSettingLogin1.getText().toString();
-                String pass = passwordSettingLogin1.getText().toString();
-                String repass = passwordSettingLogin1.getText().toString();
-                String country = countrySettingLogin1.getText().toString();
-                String number = numberSettingLogin1.getText().toString();
-                String fullname = fullNameSettingLogin1.getText().toString();
-                String email = emailSettingLogin1.getText().toString();
-                conn = DriverManager.getConnection("jdbc:mysql://62.108.35.72:3306/CarPollution?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC", "java", "m1a2l3i4Q%i6");
-                ps = conn.prepareStatement("UPDATE user SET " +
-                        "username = ?," +
-                        " password = ?," +
-                        " country = ?," +
-                        " number = ?," +
-                        " email = ?," +
-                        " fullname = ?" +
-                        " WHERE (ID = " + U.getLoginID() +")");
-                ps.setString(1, user);
-                ps.setString(2, pass);
-                ps.setString(3, country);
-                ps.setString(4, number);
-                ps.setString(5, email);
-                ps.setString(6, fullname);
-
-                ps.executeUpdate();
-
-                if (user.isEmpty() || pass.isEmpty() || country.isEmpty() || number.isEmpty() || email.isEmpty() || fullname.isEmpty()) {
-                    mss1();
-                } else if (pass.equalsIgnoreCase(repass)) {
-                    ps.executeUpdate();
-                    mss2();
-                }
-            }
-            catch (Exception e) {
-                System.err.println("Got an exception! ");
-                System.err.println(e.getMessage());
-            } finally {
-                if (rs != null) {
-                    try {
-                        rs.close();
-                    } catch (SQLException e) { /* Ignored */}
-                }
-                if (ps != null) {
-                    try {
-                        ps.close();
-                    } catch (SQLException e) { /* Ignored */}
-                }
-                if (conn != null) {
-                    try {
-                        conn.close();
-                    } catch (SQLException e) { /* Ignored */}
-                }
-            }
-        }
-
-    }
-
-
-    public void mss1(){
-        Toast.makeText(getActivity(), "Please fill of the fields! ", Toast.LENGTH_SHORT).show();
-    }
-    public void mss2(){
-        Toast.makeText(getActivity(), "Data Registered Successfully", Toast.LENGTH_SHORT).show();
-    }
-    public void mss3(){
-        Toast.makeText(getActivity(), "Password did not match", Toast.LENGTH_SHORT).show();
-    }
-
 
 }

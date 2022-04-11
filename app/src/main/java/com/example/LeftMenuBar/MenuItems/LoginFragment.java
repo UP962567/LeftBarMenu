@@ -1,5 +1,7 @@
 package com.example.LeftMenuBar.MenuItems;
 
+import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -16,101 +18,73 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.LeftMenuBar.LoginFiles.LoginActivity;
-import com.example.LeftMenuBar.Utils.UserLogin;
 import com.example.LeftMenuBar.R;
+import com.google.firebase.auth.FirebaseAuth;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.Objects;
 
 public class LoginFragment extends Fragment implements View.OnClickListener {
     TextView pageName;
     EditText username, password;
     Button loginBT, registrationBt;
-
-
+    FirebaseAuth mAuth;
+    ProgressDialog mLoadingBar;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         View view = inflater.inflate(R.layout.fragment_login, container, false);
-
-        pageName = (TextView) view.findViewById(R.id.pageLogin);
-        username = (EditText) view.findViewById(R.id.usernameLogin);
-        password = (EditText) view.findViewById(R.id.passwordLogin);
-
-        loginBT = (Button) view.findViewById(R.id.loginButtonLogin);
+        mAuth = FirebaseAuth.getInstance();
+        mLoadingBar = new ProgressDialog(getContext());
+        pageName = view.findViewById(R.id.pageLogin);
+        username = view.findViewById(R.id.usernameLogin);
+        password = view.findViewById(R.id.passwordLogin);
+        loginBT = view.findViewById(R.id.loginButtonLogin);
         loginBT.setOnClickListener(this);
-
-        registrationBt = (Button) view.findViewById(R.id.registrerButtonLogin);
+        registrationBt = view.findViewById(R.id.registrerButtonLogin);
         registrationBt.setOnClickListener(this);
-
         return view;
     }
-
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.loginButtonLogin:
-                new loginFragemntDB().loginFragemntDB();
+                LoginButton();
                 break;
             case R.id.registrerButtonLogin:
                 break;
         }
     }
-
-
-    class loginFragemntDB {
-
-        public void loginFragemntDB() {
-
-            Connection conn = null;
-            PreparedStatement ps = null;
-            ResultSet rs = null;
-
-            String user = username.getText().toString();
-            String pass = password.getText().toString();
-            String quary = "SELECT * FROM user WHERE username = ? and password = ?";
-            try {
-                conn = DriverManager.getConnection("jdbc:mysql://62.108.35.72:3306/CarPollution?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC", "java", "m1a2l3i4Q%i6");
-                ps = (conn).prepareStatement(quary);
-                ps.setString(1, user);
-                ps.setString(2, pass);
-
-                UserLogin.setLoginUsername(user);
-                UserLogin.setLoginPassword(pass);
-
-                rs = ps.executeQuery();
-                if (rs.next()) {
-                    Intent i;
-                    i = new Intent(getContext(), LoginActivity.class);
-                    startActivity(i);
+    private void LoginButton() {
+        String email = Objects.requireNonNull(username.getText()).toString();
+        String pass = Objects.requireNonNull(password.getText()).toString();
+        if(email.isEmpty() || !email.contains("@")){
+            showError(username, "Email is not valid!");
+        }  else if (pass.isEmpty() || pass.length()<5){
+            showError(password, "Password mast be more then 5 characters");
+        }  else {
+            mLoadingBar.setTitle("Login");
+            mLoadingBar.setMessage("Please wait!");
+            mLoadingBar.setCanceledOnTouchOutside(false);
+            mLoadingBar.show();
+            mAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    mLoadingBar.dismiss();
+                    Toast.makeText(getContext(), "Login is Successful", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getContext(), LoginActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
                 } else {
-                    Toast.makeText(getActivity(), "Your password does not match in our database!", Toast.LENGTH_SHORT).show();
+                    mLoadingBar.dismiss();
+                    Toast.makeText(getContext(), "Login has Failed", Toast.LENGTH_SHORT).show();
                 }
-            } catch (SQLException e1) {
-                e1.printStackTrace();
-            } finally {
-                if (rs != null) {
-                    try {
-                        rs.close();
-                    } catch (SQLException e) { /* Ignored */}
-                }
-                if (ps != null) {
-                    try {
-                        ps.close();
-                    } catch (SQLException e) { /* Ignored */}
-                }
-                if (conn != null) {
-                    try {
-                        conn.close();
-                    } catch (SQLException e) { /* Ignored */}
-                }
-            }
-
+            });
         }
+    }
+    private void showError(EditText til, String s) {
+        til.setError(s);
+        til.requestFocus();
     }
 }

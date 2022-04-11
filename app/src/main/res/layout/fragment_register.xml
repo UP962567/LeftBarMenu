@@ -41,39 +41,6 @@
             />
 
         <EditText
-            android:id="@+id/numberRegister"
-            android:layout_width="match_parent"
-
-            android:layout_height="50dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="30dp"
-            android:ems="10"
-            android:hint="Enter Number"
-            android:inputType="phone"
-            android:text=""
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-
-            />
-
-        <EditText
-            android:id="@+id/usernameRegister"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="30dp"
-            android:ems="10"
-            android:hint="Enter Username"
-            android:inputType="textPersonName"
-            android:text=""
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-
-            />
-
-        <EditText
             android:id="@+id/passwordRegister"
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -99,38 +66,6 @@
             android:ems="10"
             android:hint="ReEnter Password"
             android:inputType="textPassword"
-            android:text=""
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-
-            />
-
-        <EditText
-            android:id="@+id/fullNameRegister"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="30dp"
-            android:ems="10"
-            android:hint="Full Name"
-            android:inputType="textPersonName"
-            android:text=""
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-
-            />
-
-        <EditText
-            android:id="@+id/countryNameRegister"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="30dp"
-            android:ems="10"
-            android:hint="Enter Your Country"
-            android:inputType="textPersonName"
             android:text=""
             android:textColor="@color/white"
             android:textColorHint="@color/white"
