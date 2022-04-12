@@ -38,7 +38,6 @@ public class FindFriendLogin extends Fragment {
 
     ConstraintLayout constraintLayout;
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -55,27 +54,23 @@ public class FindFriendLogin extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
 
-
-
-        LoadUsers("");
+        LoadUsers();
 
         return view;
     }
 
 
 
-    private void LoadUsers(String s) {
-        Query query = mUserRef.orderByChild("username").endAt(s).startAt(s+"\uf8ff");
+    private void LoadUsers() {
+        Query query = mUserRef.orderByChild("username").startAt("").endAt("" +"\uf8ff");
         options= new FirebaseRecyclerOptions.Builder<Users>().setQuery(query, Users.class).build();
         adapter= new FirebaseRecyclerAdapter<Users, ZzFindFriendViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull ZzFindFriendViewHolder holder, int position, @NonNull Users model) {
-                if (!mUser.getUid().equals(getRef(position).getKey().toString())) {
+                if (!mUser.getUid().equals(getRef(position).getKey())) {
                     Picasso.get().load(model.getProfileImage()).into(holder.circleImageView);
                     holder.username.setText(model.getUsername());
-                    holder.gender.setText("TEST");
-
-
+                    //holder.gender.setText("Male");
 
                 } else {
                     holder.itemView.setVisibility(View.GONE);
@@ -83,7 +78,7 @@ public class FindFriendLogin extends Fragment {
                 }
                 holder.itemView.setOnClickListener(view -> {
                     Intent intent = new Intent(getContext(), FindFriendPorfileLogin.class);
-                    intent.putExtra("userKey",getRef(position).getKey().toString());
+                    intent.putExtra("userKey", getRef(position).getKey());
                     startActivity(intent);
                 });
             }

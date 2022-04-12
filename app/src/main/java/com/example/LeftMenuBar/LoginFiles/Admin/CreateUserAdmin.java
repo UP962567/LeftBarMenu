@@ -7,8 +7,6 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -29,12 +27,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class CreateUserAdmin extends AppCompatActivity {
 
     CircleImageView profileImage;
-    EditText inputEmail, inputPassword, LevelID;
+    EditText inputEmail, inputPassword, LevelID, Gender;
     EditText inputUsername1, inputFullName1, inputCountry1, inputNumber1;
     CheckBox checkBox;
     Button button;
-    RadioGroup radioGrp1;
-    RadioButton radioM1 , radioF1;
+
 
     FirebaseAuth mAuth;
     FirebaseUser mUser;
@@ -60,9 +57,8 @@ public class CreateUserAdmin extends AppCompatActivity {
         inputNumber1 = findViewById(R.id.inputNumber);
         checkBox = findViewById(R.id.checkBox);
         button = findViewById(R.id.buttonSetUp);
-        radioM1 = findViewById(R.id.radioM);
-        radioF1 = findViewById(R.id.radioF);
-        radioGrp1 = findViewById(R.id.radioGrp);
+        Gender = findViewById(R.id.inputGender);
+
         LevelID = findViewById(R.id.inputLevel);
 
         mAuth = FirebaseAuth.getInstance();
@@ -85,7 +81,7 @@ public class CreateUserAdmin extends AppCompatActivity {
         String fullName=inputFullName1.getText().toString();
         String country=inputCountry1.getText().toString();
         String number=inputNumber1.getText().toString();
-        int selectedId = radioGrp1.getCheckedRadioButtonId();
+        String gender = Gender.getText().toString();
         String access = LevelID.getText().toString();
 
         if(email.isEmpty() || !email.contains("@")){
@@ -131,7 +127,7 @@ public class CreateUserAdmin extends AppCompatActivity {
                                 hashMap.put("fullName", fullName);
                                 hashMap.put("country", country);
                                 hashMap.put("phone", number);
-                                hashMap.put("gender", selectedId);
+                                hashMap.put("gender", gender);
                                 hashMap.put("profileImage", uri.toString());
                                 hashMap.put("status", "offline");
                                 if (access.equals("2")) {

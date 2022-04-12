@@ -10,6 +10,8 @@ package com.example.LeftMenuBar.LoginFiles;
  * From the logic of it will work on the main project!
  **/
 public class User {
+
+
     private static String username;
     private static String email;
     private static String level;
