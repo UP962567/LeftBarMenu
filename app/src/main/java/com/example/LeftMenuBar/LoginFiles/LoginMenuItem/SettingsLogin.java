@@ -88,10 +88,11 @@ public class SettingsLogin extends Fragment {
                     inputUsername1.setText(username);
                     inputFullName1.setText(fullname);
                     inputAccessLevel.setText(level);
-                    if (gender == 2131231137+"") {
+
+                    if(gender.equals(2131231164+"")){
                         radioM1.setChecked(true);
                         radioF1.setChecked(false);
-                    } else {
+                    } else if (gender.equals(2131231162+"")){
                         radioM1.setChecked(false);
                         radioF1.setChecked(true);
                     }

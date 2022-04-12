@@ -10,12 +10,12 @@ import com.example.LeftMenuBar.R;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class FindFriendViewHolder extends RecyclerView.ViewHolder {
+public class ZzFindFriendViewHolder extends RecyclerView.ViewHolder {
 
     CircleImageView circleImageView;
     TextView username, gender;
 
-    public FindFriendViewHolder(@NonNull View itemView) {
+    public ZzFindFriendViewHolder(@NonNull View itemView) {
         super(itemView);
 
         circleImageView = itemView.findViewById(R.id.ProfileImage_FindFriend);

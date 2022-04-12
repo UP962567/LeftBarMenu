@@ -40,5 +40,6 @@
     <string name="comment">Comment</string>
     <string name="update_information">Update Information</string>
     <string name="search">Search</string>
+    <string name="firstmessage">FirstMessage</string>
 
 </resources>

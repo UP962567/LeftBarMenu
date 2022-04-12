@@ -10,6 +10,11 @@
             android:icon="@drawable/ic_dashboard"
             android:title="Dashboard"
             />
+        <item
+            android:id="@+id/login_nav_chat"
+            android:icon="@drawable/ic_chat"
+            android:title="Chat"
+            />
         <item android:id="@+id/login_nav_map"
             android:icon="@drawable/ic_map"
             android:title="Map"

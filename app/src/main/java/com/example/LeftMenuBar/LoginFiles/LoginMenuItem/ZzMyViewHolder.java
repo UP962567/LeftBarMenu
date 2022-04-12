@@ -16,13 +16,13 @@ import com.google.firebase.database.ValueEventListener;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MyViewHolder extends RecyclerView.ViewHolder {
+public class ZzMyViewHolder extends RecyclerView.ViewHolder {
     CircleImageView profileImage;
     TextView username,likeCounter,postDesc,_profileTimePosted;
     ImageView postImage, likeImage;
 
 
-    public MyViewHolder(@NonNull View itemView) {
+    public ZzMyViewHolder(@NonNull View itemView) {
         super(itemView);
         profileImage=itemView.findViewById(R.id._profileImagePosted);
         username=itemView.findViewById(R.id._profileNamePosted);

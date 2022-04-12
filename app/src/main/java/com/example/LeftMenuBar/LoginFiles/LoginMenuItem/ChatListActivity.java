@@ -23,7 +23,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.squareup.picasso.Picasso;
 
-public class YourFriendLogin extends androidx.fragment.app.Fragment {
+public class ChatListActivity extends androidx.fragment.app.Fragment {
+
 
     FirebaseRecyclerOptions<Friend> options;
     FirebaseRecyclerAdapter<Friend, ZzFriendViewHolder> adapter;
@@ -32,18 +33,19 @@ public class YourFriendLogin extends androidx.fragment.app.Fragment {
     FirebaseUser mUser;
 
     RecyclerView recyclerView;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-        View view = inflater.inflate(R.layout.activity_your_friend_login, container, false);
+        View view = inflater.inflate(R.layout.activity_chat_list, container, false);
 
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
         mRef = FirebaseDatabase.getInstance().getReference().child("Friends");
 
-        recyclerView= view.findViewById(R.id.YourFriendRecycle);
+        recyclerView= view.findViewById(R.id.recycleChatList);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         LoadFriends("");

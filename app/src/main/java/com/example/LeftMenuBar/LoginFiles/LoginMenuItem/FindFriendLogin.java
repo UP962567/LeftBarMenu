@@ -29,7 +29,7 @@ import com.squareup.picasso.Picasso;
 public class FindFriendLogin extends Fragment {
 
     FirebaseRecyclerOptions<Users> options;
-    FirebaseRecyclerAdapter<Users, FindFriendViewHolder> adapter;
+    FirebaseRecyclerAdapter<Users, ZzFindFriendViewHolder> adapter;
 
     DatabaseReference mUserRef;
     FirebaseAuth mAuth;
@@ -67,16 +67,16 @@ public class FindFriendLogin extends Fragment {
     private void LoadUsers(String s) {
         Query query = mUserRef.orderByChild("username").startAt(s).endAt(s+"\uf8ff");
         options= new FirebaseRecyclerOptions.Builder<Users>().setQuery(query, Users.class).build();
-        adapter= new FirebaseRecyclerAdapter<Users, FindFriendViewHolder>(options) {
+        adapter= new FirebaseRecyclerAdapter<Users, ZzFindFriendViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull FindFriendViewHolder holder, int position, @NonNull Users model) {
+            protected void onBindViewHolder(@NonNull ZzFindFriendViewHolder holder, int position, @NonNull Users model) {
                 if (!mUser.getUid().equals(getRef(position).getKey().toString())) {
                     Picasso.get().load(model.getProfileImage()).into(holder.circleImageView);
                     holder.username.setText(model.getUsername());
 
-                    if(model.getGender().equals(2131231137+"")){
+                    if(model.getGender().equals(2131231164+"")){
                         holder.gender.setText("Male");
-                    } else if (model.getGender().equals(2131231135+"")){
+                    } else if (model.getGender().equals(2131231162+"")){
                         holder.gender.setText("Female");
                     }
 
@@ -94,9 +94,9 @@ public class FindFriendLogin extends Fragment {
 
             @NonNull
             @Override
-            public FindFriendViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            public ZzFindFriendViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.single_view_find_friends, parent, false);
-                return new FindFriendViewHolder(view);
+                return new ZzFindFriendViewHolder(view);
             }
         };
 

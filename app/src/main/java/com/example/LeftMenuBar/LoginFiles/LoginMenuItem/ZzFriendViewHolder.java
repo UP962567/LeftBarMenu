@@ -19,11 +19,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * <p>
  * From the logic of it will work on the main project!
  **/
-public class FriendViewHolder extends RecyclerView.ViewHolder {
+public class ZzFriendViewHolder extends RecyclerView.ViewHolder {
     CircleImageView profileImageURL;
     TextView username, gender;
 
-    public FriendViewHolder(@NonNull View itemView) {
+    public ZzFriendViewHolder(@NonNull View itemView) {
         super(itemView);
         profileImageURL = itemView.findViewById(R.id.ProfileImage_YourFriend);
         username = itemView.findViewById(R.id.Username_YourFriend);

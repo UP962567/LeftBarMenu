@@ -12,14 +12,15 @@
         </deviceKey>
       </Target>
     </runningDeviceTargetSelectedWithDropDown>
-    <timeTargetWasSelectedWithDropDown value="2022-04-11T18:30:56.593911100Z" />
+    <timeTargetWasSelectedWithDropDown value="2022-04-11T19:20:52.325723Z" />
+    <multipleDevicesSelectedInDropDown value="true" />
     <runningDeviceTargetsSelectedWithDialog>
       <Target>
         <type value="RUNNING_DEVICE_TARGET" />
         <deviceKey>
           <Key>
-            <type value="SERIAL_NUMBER" />
-            <value value="R58M43LL5RA" />
+            <type value="VIRTUAL_DEVICE_PATH" />
+            <value value="C:\Users\malid\.android\avd\Pixel_4_API_30_R.avd" />
           </Key>
         </deviceKey>
       </Target>

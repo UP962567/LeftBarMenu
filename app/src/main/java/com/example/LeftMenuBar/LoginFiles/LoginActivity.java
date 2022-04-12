@@ -15,14 +15,14 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-
-import com.example.LeftMenuBar.LoginFiles.LoginMenuItem.YourFriendLogin;
-import com.example.LeftMenuBar.LoginFiles.LoginMenuItem.FindFriendLogin;
+import com.example.LeftMenuBar.LoginFiles.LoginMenuItem.ChatListActivity;
 import com.example.LeftMenuBar.LoginFiles.Admin.CreateUserAdmin;
 import com.example.LeftMenuBar.LoginFiles.LoginMenuItem.ContactLogin;
 import com.example.LeftMenuBar.LoginFiles.LoginMenuItem.DashboardLogin;
+import com.example.LeftMenuBar.LoginFiles.LoginMenuItem.FindFriendLogin;
 import com.example.LeftMenuBar.LoginFiles.LoginMenuItem.NewsLogin;
 import com.example.LeftMenuBar.LoginFiles.LoginMenuItem.SettingsLogin;
+import com.example.LeftMenuBar.LoginFiles.LoginMenuItem.YourFriendLogin;
 import com.example.LeftMenuBar.MainActivity;
 import com.example.LeftMenuBar.R;
 import com.example.LeftMenuBar.Utils.UserLogin;
@@ -34,6 +34,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -91,6 +92,8 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
         mRef = FirebaseDatabase.getInstance().getReference().child("Users");
+
+        FirebaseMessaging.getInstance().subscribeToTopic(mUser.getUid());
 
         mRef.child(mUser.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
@@ -172,6 +175,9 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
         if (id == R.id.login_nav_dashboard) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_login,
                     new DashboardLogin()).commit();
+        } else if (id == R.id.login_nav_chat) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_login,
+                    new ChatListActivity()).commit();
         } else if (id == R.id.login_nav_news) {
             if (level == 1) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_login,
@@ -204,50 +210,6 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_login,
                     new CreateUserAdmin()).commit();
         }
-
-
-
-//        switch (item.getItemId()) {
-//            case R.id.login_nav_dashboard:
-//                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_login,
-//                        new DashboardLogin()).commit();
-//                break;
-//            case R.id.login_nav_news:
-//                System.out.println(User.getLevelAccess() +  "   PSe nuk ben pra");
-//                if(User.getLevelAccess() == "admin"){
-//                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_login,
-//                            new NewsLogin()).commit();
-//                    break;
-//                } else {
-//                    Toast.makeText(this, "Mail", Toast.LENGTH_SHORT).show();
-//                    break;
-//                }
-//            case R.id.login_nav_profile:
-//                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_login,
-//                        new SettingsLogin()).commit();
-//                break;
-//            case R.id.login_nav_settings:
-//                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_login,
-//                        new SettingsLogin()).commit();
-//                break;
-//            case R.id.login_nav_contact:
-//                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_login,
-//                        new ContactLogin()).commit();
-//                break;
-//            case R.id.login_nav_logout:
-//                Toast.makeText(this, "LogOut", Toast.LENGTH_SHORT).show();
-//                Intent i;
-//                i = new Intent(this, MainActivity.class);
-//                startActivity(i);
-//                break;
-//            case R.id.nav_share:
-//                Toast.makeText(this, "Share", Toast.LENGTH_SHORT).show();
-//                break;
-//            case R.id.nav_mail:
-//                Toast.makeText(this, "Mail", Toast.LENGTH_SHORT).show();
-//                break;
-//        }
-
         drawer_login.closeDrawer(GravityCompat.START);
         return true;
     }

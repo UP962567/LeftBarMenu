@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,7 +58,7 @@ public class NewsLogin extends Fragment {
     DatabaseReference mRef,pRef, lRef;
     ProgressDialog mBar;
     RecyclerView recyclerView;
-    FirebaseRecyclerAdapter<Posts,MyViewHolder> adapter;
+    FirebaseRecyclerAdapter<Posts, ZzMyViewHolder> adapter;
     FirebaseRecyclerOptions<Posts> options;
 
     private final int REQUEST_CODE = 101;
@@ -74,8 +75,8 @@ public class NewsLogin extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-//        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-//        StrictMode.setThreadPolicy(policy);
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
         View view = inflater.inflate(R.layout.activity_news_login, container, false);
 
 
@@ -124,8 +125,6 @@ public class NewsLogin extends Fragment {
         }
 
         sendPostImageView1.setOnClickListener(view1 -> AddPost());
-
-
         addPostImageView1.setOnClickListener(view1 -> {
             Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
             intent.setType("image/*");
@@ -186,9 +185,9 @@ public class NewsLogin extends Fragment {
 
     private void LoadPosts() {
         options= new FirebaseRecyclerOptions.Builder<Posts>().setQuery(pRef,Posts.class).build();
-        adapter= new FirebaseRecyclerAdapter<Posts, MyViewHolder>(options) {
+        adapter= new FirebaseRecyclerAdapter<Posts, ZzMyViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull MyViewHolder holder, int position, @NonNull Posts model) {
+            protected void onBindViewHolder(@NonNull ZzMyViewHolder holder, int position, @NonNull Posts model) {
                 String postKey = getRef(position).getKey();
                 holder.postDesc.setText(model.getPostText());
                 final String timeAgo = calculateTimeAgo(model.getDate());
@@ -219,9 +218,9 @@ public class NewsLogin extends Fragment {
             }
             @NonNull
             @Override
-            public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            public ZzMyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.single_view_posting, parent, false);
-                return new MyViewHolder(view);
+                return new ZzMyViewHolder(view);
             }
         };
         adapter.startListening();

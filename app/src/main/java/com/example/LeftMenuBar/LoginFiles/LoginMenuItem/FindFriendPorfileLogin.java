@@ -1,5 +1,6 @@
 package com.example.LeftMenuBar.LoginFiles.LoginMenuItem;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -31,12 +32,13 @@ public class FindFriendPorfileLogin extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseUser mUser;
 
+    String MYprofileImageUrl, MYusername, MYgender;
     String profileImageUrl, username, gender;
     Button buttonP, buttonC;
 
     String CurrentState="nothing_happened";
 
-
+    String userID;
 
     CircleImageView profileImage1;
     TextView username1, username2;
@@ -47,10 +49,10 @@ public class FindFriendPorfileLogin extends AppCompatActivity {
         setContentView(R.layout.activity_find_friend_porfile_login);
 
 
-        String userID = getIntent().getExtras().getString("userKey");
+        userID = getIntent().getExtras().getString("userKey");
         //Toast.makeText(FindFriendPorfileLogin.this, ""+userID, Toast.LENGTH_SHORT).show();
 
-        mRef = FirebaseDatabase.getInstance().getReference().child("Users").child(userID);
+        mRef = FirebaseDatabase.getInstance().getReference().child("Users");
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
         requestRef = FirebaseDatabase.getInstance().getReference().child("Request");
@@ -63,6 +65,7 @@ public class FindFriendPorfileLogin extends AppCompatActivity {
         buttonP=findViewById(R.id.buttonPerform);
 
         LoadUser();
+        LoadMyProfile();
 
         buttonP.setOnClickListener(view -> PerformAction(userID));
         buttonC.setOnClickListener(view -> Unfried(userID));
@@ -70,42 +73,7 @@ public class FindFriendPorfileLogin extends AppCompatActivity {
         CheckUserExistance(userID);
     }
 
-    private void Unfried(String userID){
-        if (CurrentState.equals("friend")){
-            friendRef.child(mUser.getUid()).child(userID).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if (task.isSuccessful()) {
-                        friendRef.child(userID).child(mUser.getUid()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()) {
-                                    Toast.makeText(getApplicationContext(), "UNFRIENDED !?", Toast.LENGTH_SHORT).show();
-                                    CurrentState="nothing_happened";
-                                    buttonP.setText("Send Friend");
-                                    buttonC.setVisibility(View.GONE);
-                                }
-                            }
-                        });
-                    }
-                }
-            });
-        } if (CurrentState.equals("he_send_pending")){
-            HashMap hashMap = new HashMap();
-            hashMap.put("status", "decline");
-            requestRef.child(userID).child(mUser.getUid()).updateChildren(hashMap).addOnCompleteListener(new OnCompleteListener() {
-                @Override
-                public void onComplete(@NonNull Task task) {
-                    if (task.isSuccessful()) {
-                        Toast.makeText(getApplicationContext(), "Declined !", Toast.LENGTH_SHORT).show();
-                        CurrentState="he_send_decline";
-                        buttonP.setVisibility(View.GONE);
-                        buttonC.setVisibility(View.GONE);
-                    }
-                }
-            });
-        }
-    }
+
 
     private void CheckUserExistance(String userID){
         friendRef.child(mUser.getUid()).child(userID).addValueEventListener(new ValueEventListener() {
@@ -172,8 +140,6 @@ public class FindFriendPorfileLogin extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
-
-
         if (CurrentState.equals("nothing_happened")){
             CurrentState = "nothing_happened";
             buttonP.setText("Send Friend");
@@ -182,7 +148,7 @@ public class FindFriendPorfileLogin extends AppCompatActivity {
     }
 
     private void PerformAction(String userID) {
-        if(CurrentState.equals("nothing_happened")) {
+        if (CurrentState.equals("nothing_happened")) {
             HashMap hashMap = new HashMap();
             hashMap.put("status","pending");
             requestRef.child(mUser.getUid()).child(userID).updateChildren(hashMap).addOnCompleteListener(task -> {
@@ -195,7 +161,8 @@ public class FindFriendPorfileLogin extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), ""+task.getException().toString(), Toast.LENGTH_SHORT).show();
                 }
             });
-        } if (CurrentState.equals("I_sent_pending") || CurrentState.equals("I_sent_decline")){
+        }
+        if (CurrentState.equals("I_sent_pending") || CurrentState.equals("I_sent_decline")){
             requestRef.child(mUser.getUid()).child(userID).removeValue().addOnCompleteListener(task -> {
                 if (task.isSuccessful()){
                     Toast.makeText(getApplicationContext(), "You cancelled Request", Toast.LENGTH_SHORT).show();
@@ -206,45 +173,85 @@ public class FindFriendPorfileLogin extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), ""+task.getException().toString(), Toast.LENGTH_SHORT).show();
                 }
             });
-        } if (CurrentState.equals("he_send_pending")) {
-            requestRef.child(userID).child(mUser.getUid()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+        }
+        if (CurrentState.equals("he_send_pending")) {
+            requestRef.child(userID).child(mUser.getUid()).removeValue().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    final HashMap hashMap = new HashMap();
+                    hashMap.put("status", "friend");
+                    hashMap.put("username", username);
+                    hashMap.put("profileImageURL", profileImageUrl);
+                    hashMap.put("gender", gender);
+
+                    final HashMap hashMap1 = new HashMap();
+                    hashMap1.put("status", "friend");
+                    hashMap1.put("username", MYusername);
+                    hashMap1.put("profileImageURL", MYprofileImageUrl);
+                    hashMap1.put("gender", MYgender);
+
+                    friendRef.child(mUser.getUid()).child(userID).updateChildren(hashMap).addOnCompleteListener(
+                            task1 -> {
+                                if (task1.isSuccessful()) {
+                                    friendRef.child(userID).child(mUser.getUid()).updateChildren(hashMap1).addOnCompleteListener(task11 -> {
+                                        Toast.makeText(getApplicationContext(), "You Added Friend", Toast.LENGTH_SHORT).show();
+                                        CurrentState = "friend";
+                                        buttonP.setText("Send SMS");
+                                        buttonC.setText("Unfriend");
+                                        buttonC.setVisibility(View.VISIBLE);
+                                    });
+                                }
+                            }
+                    );
+                }
+            });
+        }
+        if (CurrentState.equals("friend")){
+            Intent intent = new Intent(getApplication(), ChatActivity.class);
+            intent.putExtra("OtherUserID", userID);
+            startActivity(intent);
+        }
+    }
+
+    private void Unfried(String userID){
+        if (CurrentState.equals("friend")){
+            friendRef.child(mUser.getUid()).child(userID).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()) {
-                        HashMap hashMap = new HashMap();
-                        hashMap.put("status", "friend");
-                        hashMap.put("username", username);
-                        hashMap.put("profileImageURL", profileImageUrl);
-                        hashMap.put("gender", gender);
-                        friendRef.child(mUser.getUid()).child(userID).updateChildren(hashMap).addOnCompleteListener(
-                                new OnCompleteListener() {
-                                    @Override
-                                    public void onComplete(@NonNull Task task) {
-                                        if (task.isSuccessful()) {
-                                            friendRef.child(userID).child(mUser.getUid()).updateChildren(hashMap).addOnCompleteListener(new OnCompleteListener() {
-                                                @Override
-                                                public void onComplete(@NonNull Task task) {
-                                                    Toast.makeText(getApplicationContext(), "You Added Friend", Toast.LENGTH_SHORT).show();
-                                                    CurrentState = "friend";
-                                                    buttonP.setText("Send SMS");
-                                                    buttonC.setText("Unfriend");
-                                                    buttonC.setVisibility(View.VISIBLE);
-                                                }
-                                            });
-                                        }
-                                    }
+                        friendRef.child(userID).child(mUser.getUid()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(getApplicationContext(), "UNFRIENDED !?", Toast.LENGTH_SHORT).show();
+                                    CurrentState="nothing_happened";
+                                    buttonP.setText("Send Friend");
+                                    buttonC.setVisibility(View.GONE);
                                 }
-                        );
+                            }
+                        });
                     }
                 }
             });
-        } if (CurrentState.equals("friend")){
-            //
+        }
+        if (CurrentState.equals("he_send_pending")){
+            HashMap hashMap = new HashMap();
+            hashMap.put("status", "decline");
+            requestRef.child(userID).child(mUser.getUid()).updateChildren(hashMap).addOnCompleteListener(new OnCompleteListener() {
+                @Override
+                public void onComplete(@NonNull Task task) {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(getApplicationContext(), "Declined !", Toast.LENGTH_SHORT).show();
+                        CurrentState="he_send_decline";
+                        buttonP.setVisibility(View.GONE);
+                        buttonC.setVisibility(View.GONE);
+                    }
+                }
+            });
         }
     }
 
     private void LoadUser() {
-        mRef.addValueEventListener(new ValueEventListener() {
+        mRef.child(userID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()) {
@@ -254,7 +261,6 @@ public class FindFriendPorfileLogin extends AppCompatActivity {
 
                     Picasso.get().load(profileImageUrl).into(profileImage1);
                     username1.setText(username);
-
                     if(gender.equals(2131231137+"")){
                         username2.setText("Male");
                     } else if (gender.equals(2131231135+"")){
@@ -264,15 +270,40 @@ public class FindFriendPorfileLogin extends AppCompatActivity {
                     Toast.makeText(FindFriendPorfileLogin.this, "Data not found!", Toast.LENGTH_SHORT).show();
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(FindFriendPorfileLogin.this, ""+ error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 
+
+    private void LoadMyProfile() {
+        mRef.child(mUser.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()) {
+                    MYprofileImageUrl=snapshot.child("profileImage").getValue().toString();
+                    MYusername=snapshot.child("username").getValue().toString();
+                    MYgender=snapshot.child("gender").getValue().toString();
+
+                    Picasso.get().load(profileImageUrl).into(profileImage1);
+                    username1.setText(username);
+                    if(gender.equals(2131231137+"")){
+                        username2.setText("Male");
+                    } else if (gender.equals(2131231135+"")){
+                        username2.setText("Female");
+                    }
+                } else {
+                    Toast.makeText(FindFriendPorfileLogin.this, "Data not found!", Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(FindFriendPorfileLogin.this, ""+ error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
 
 }
