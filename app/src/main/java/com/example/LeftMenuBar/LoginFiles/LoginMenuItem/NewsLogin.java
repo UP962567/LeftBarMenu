@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -68,6 +69,8 @@ public class NewsLogin extends Fragment {
     private final int REQUEST_CODE = 101;
     Uri imageUri;
 
+    ConstraintLayout constraintLayout5;
+
     String profileImageUrlV, userNameV;
     EditText inputAddPost1;
     ImageView addPostImageView1, sendPostImageView1;
@@ -110,8 +113,10 @@ public class NewsLogin extends Fragment {
         addPostImageView1=view.findViewById(R.id.addPostImageView);
         sendPostImageView1=view.findViewById(R.id.sendPostImageView);
         inputAddPost1=view.findViewById(R.id.inputAddPost);
+        constraintLayout5=view.findViewById(R.id.constraintLayout5POSTING);
 
         if (level == 1) {
+            constraintLayout5.setVisibility(View.GONE);
             addPostImageView1.setVisibility(View.INVISIBLE);
             sendPostImageView1.setVisibility(View.INVISIBLE);
             inputAddPost1.setVisibility(View.VISIBLE);
@@ -122,6 +127,7 @@ public class NewsLogin extends Fragment {
             inputAddPost1.setFocusableInTouchMode(false);
 
         } else if (level == 2) {
+            constraintLayout5.setVisibility(View.VISIBLE);
             addPostImageView1.setVisibility(View.VISIBLE);
             sendPostImageView1.setVisibility(View.VISIBLE);
             inputAddPost1.setVisibility(View.VISIBLE);
