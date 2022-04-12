@@ -36,6 +36,8 @@ public class SetupLogin extends AppCompatActivity {
     RadioGroup radioGrp1;
     RadioButton radioM1 , radioF1;
 
+    String test;
+
     FirebaseAuth mAuth;
     FirebaseUser mUser;
     DatabaseReference mRef;

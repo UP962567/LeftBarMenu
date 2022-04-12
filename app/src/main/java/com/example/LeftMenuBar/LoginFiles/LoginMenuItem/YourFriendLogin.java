@@ -59,9 +59,9 @@ public class YourFriendLogin extends androidx.fragment.app.Fragment {
             protected void onBindViewHolder(@NonNull ZzFriendViewHolder holder, int position, @NonNull Friend model) {
                 Picasso.get().load(model.getProfileImageURL()).into(holder.profileImageURL);
                 holder.username.setText(model.getUsername());
-                if(model.getGender().equals(2131231164+"")){
+                if(model.getGender().equals(2131231164+"") || model.getGender().equals(2131231170+"")){
                     holder.gender.setText("Male");
-                } else if (model.getGender().equals(2131231162+"")){
+                } else if (model.getGender().equals(2131231162+"") || model.getGender().equals(2131231168+"")){
                     holder.gender.setText("Female");
                 }
 

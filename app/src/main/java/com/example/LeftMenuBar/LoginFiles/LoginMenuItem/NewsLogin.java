@@ -25,7 +25,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.LeftMenuBar.LoginFiles.User;
-import com.example.LeftMenuBar.MenuItems.LoginFragment;
 import com.example.LeftMenuBar.R;
 import com.example.LeftMenuBar.backcode.Posts;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -37,6 +36,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -55,6 +55,10 @@ public class NewsLogin extends Fragment {
     FirebaseAuth mAuth;
     FirebaseUser mUser;
     StorageReference sRef;
+    DatabaseReference mUserRef;
+
+    DatabaseReference TUserRef;
+
     DatabaseReference mRef,pRef, lRef;
     ProgressDialog mBar;
     RecyclerView recyclerView;
@@ -85,6 +89,10 @@ public class NewsLogin extends Fragment {
         mUser = mAuth.getCurrentUser();
         mRef = FirebaseDatabase.getInstance().getReference().child("Users");
         pRef = FirebaseDatabase.getInstance().getReference().child("Posts");
+
+        TUserRef = FirebaseDatabase.getInstance().getReference().child("Test");
+
+        mUserRef = FirebaseDatabase.getInstance().getReference().child("Posts");
         lRef = FirebaseDatabase.getInstance().getReference().child("Liked");
         mBar = new ProgressDialog(getContext());
         sRef = FirebaseStorage.getInstance().getReference().child("PostImages");
@@ -131,7 +139,7 @@ public class NewsLogin extends Fragment {
             startActivityForResult(intent,REQUEST_CODE);
         });
 
-        LoadPosts();
+        LoadPosts("");
         return view;
     }
 
@@ -149,20 +157,24 @@ public class NewsLogin extends Fragment {
             mBar.setCanceledOnTouchOutside(false);
             mBar.show();
 
+            int i = (int) new Date().getTime();
+            int w = i - i - i;
+
             Date date = new Date();
             @SuppressLint("SimpleDateFormat") SimpleDateFormat formatter = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
             String strDate = formatter.format(date);
 
-            sRef.child(mUser.getUid() + " - "+strDate + " - " + userNameV).putFile(imageUri).addOnCompleteListener(task -> {
+            sRef.child(mUser.getUid() + " - "+ strDate + " - " + userNameV).putFile(imageUri).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     sRef.child(mUser.getUid() + " - "+strDate + " - " + userNameV).getDownloadUrl().addOnSuccessListener(uri -> {
                         HashMap hashMap = new HashMap();
                         hashMap.put("date", strDate);
                         hashMap.put("imagePost", uri.toString());
                         hashMap.put("postText",postText);
+                        hashMap.put("sort",w);
                         hashMap.put("userProfileImage", profileImageUrlV);
                         hashMap.put("usernameID", userNameV);
-                        pRef.child(strDate + " - " + userNameV).updateChildren(hashMap).addOnCompleteListener(task1 -> {
+                        pRef.child(User.getUsername() + " - " + User.getLevel() + " - " +  mUser.getUid() + " - " + strDate).updateChildren(hashMap).addOnCompleteListener(task1 -> {
                             if (task1.isSuccessful()){
                                 mBar.dismiss();
                                 Toast.makeText(getContext(), "Post Added!", Toast.LENGTH_SHORT).show();
@@ -174,6 +186,7 @@ public class NewsLogin extends Fragment {
                         });
                     });
                 } else {
+
                     mBar.dismiss();
                     Toast.makeText(getContext(), "Error: " + task.getException().toString(), Toast.LENGTH_SHORT).show();
                 }
@@ -181,10 +194,9 @@ public class NewsLogin extends Fragment {
         }
     }
 
-
-
-    private void LoadPosts() {
-        options= new FirebaseRecyclerOptions.Builder<Posts>().setQuery(pRef,Posts.class).build();
+    private void LoadPosts(String s) {
+        Query query = mUserRef.orderByChild("sort");
+        options= new FirebaseRecyclerOptions.Builder<Posts>().setQuery(query,Posts.class).build();
         adapter= new FirebaseRecyclerAdapter<Posts, ZzMyViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull ZzMyViewHolder holder, int position, @NonNull Posts model) {
@@ -239,11 +251,6 @@ public class NewsLogin extends Fragment {
             e.printStackTrace();
         }
         return null;
-    }
-
-    private void SendUserToLoginActivity() {
-        Intent intent = new Intent(getContext(), LoginFragment.class);
-        startActivity(intent);
     }
 
 

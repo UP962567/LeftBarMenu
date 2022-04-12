@@ -207,8 +207,8 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
             Intent i = new Intent(this, MainActivity.class);
             startActivity(i);
         } else if (id == R.id.nav_create_user) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_login,
-                    new CreateUserAdmin()).commit();
+            Intent i = new Intent(this, CreateUserAdmin.class);
+            startActivity(i);
         }
         drawer_login.closeDrawer(GravityCompat.START);
         return true;

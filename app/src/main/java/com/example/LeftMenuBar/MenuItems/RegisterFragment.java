@@ -83,7 +83,6 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
                 }
             });
         }
-
     }
 
     private void showError(EditText til, String s) {

@@ -80,9 +80,11 @@
                 android:id="@+id/_likeButton"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
-                android:layout_marginStart="32dp"
                 android:layout_marginTop="8dp"
-                app:layout_constraintStart_toStartOf="@+id/_bodyImagePosted"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/_bodyImagePosted"
                 app:srcCompat="@drawable/ic_like" />
 

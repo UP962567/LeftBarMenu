@@ -65,7 +65,7 @@ public class FindFriendLogin extends Fragment {
 
 
     private void LoadUsers(String s) {
-        Query query = mUserRef.orderByChild("username").startAt(s).endAt(s+"\uf8ff");
+        Query query = mUserRef.orderByChild("username").endAt(s).startAt(s+"\uf8ff");
         options= new FirebaseRecyclerOptions.Builder<Users>().setQuery(query, Users.class).build();
         adapter= new FirebaseRecyclerAdapter<Users, ZzFindFriendViewHolder>(options) {
             @Override
@@ -73,12 +73,8 @@ public class FindFriendLogin extends Fragment {
                 if (!mUser.getUid().equals(getRef(position).getKey().toString())) {
                     Picasso.get().load(model.getProfileImage()).into(holder.circleImageView);
                     holder.username.setText(model.getUsername());
+                    holder.gender.setText("TEST");
 
-                    if(model.getGender().equals(2131231164+"")){
-                        holder.gender.setText("Male");
-                    } else if (model.getGender().equals(2131231162+"")){
-                        holder.gender.setText("Female");
-                    }
 
 
                 } else {
