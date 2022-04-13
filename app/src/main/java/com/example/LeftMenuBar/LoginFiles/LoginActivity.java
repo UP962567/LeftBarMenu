@@ -17,11 +17,12 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.LeftMenuBar.LoginFiles.Admin.CreateUserAdmin;
 import com.example.LeftMenuBar.LoginFiles.LoginMenuItem.ChatListActivity;
+import com.example.LeftMenuBar.LoginFiles.LoginMenuItem.SettingsActivityLogin;
 import com.example.LeftMenuBar.LoginFiles.LoginMenuItem.ContactLogin;
 import com.example.LeftMenuBar.LoginFiles.LoginMenuItem.DashboardLogin;
 import com.example.LeftMenuBar.LoginFiles.LoginMenuItem.FindFriendLogin;
 import com.example.LeftMenuBar.LoginFiles.LoginMenuItem.NewsLogin;
-import com.example.LeftMenuBar.LoginFiles.LoginMenuItem.SettingsLogin;
+import com.example.LeftMenuBar.LoginFiles.LoginMenuItem.ProfileLogin;
 import com.example.LeftMenuBar.LoginFiles.LoginMenuItem.YourFriendLogin;
 import com.example.LeftMenuBar.MainActivity;
 import com.example.LeftMenuBar.R;
@@ -188,7 +189,10 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
             }
         } else if (id == R.id.login_nav_profile) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_login,
-                    new SettingsLogin()).commit();
+                    new ProfileLogin()).commit();
+        } else if (id == R.id.login_nav_settings) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_login,
+                    new SettingsActivityLogin()).commit();
         } else if (id == R.id.login_nav_addfriends) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_login,
                     new FindFriendLogin()).commit();
@@ -197,7 +201,7 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
                     new YourFriendLogin()).commit();
         } else if (id == R.id.login_nav_map) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_login,
-                    new SettingsLogin()).commit();
+                    new ProfileLogin()).commit();
         } else if (id == R.id.login_nav_contact) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_login,
                     new ContactLogin()).commit();

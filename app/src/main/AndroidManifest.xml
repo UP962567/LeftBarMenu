@@ -12,7 +12,8 @@
         android:theme="@style/Theme.MyApplication">
         <activity
             android:name=".LoginFiles.LoginMenuItem.ChatListActivity"
-            android:exported="false" />
+            android:exported="false"
+            tools:ignore="Instantiatable" />
         <activity
             android:name=".LoginFiles.LoginMenuItem.ChatActivity"
             android:exported="false"
@@ -47,7 +48,7 @@
             android:exported="false"
             tools:ignore="Instantiatable" />
         <activity
-            android:name=".LoginFiles.LoginMenuItem.SettingsLogin"
+            android:name=".LoginFiles.LoginMenuItem.ProfileLogin"
             android:exported="false"
             tools:ignore="Instantiatable" />
         <activity
@@ -71,12 +72,14 @@
 
         <service
             android:name=".backcode.MyFirebaseMessagingService"
-            android:exported="false"
-            android:directBootAware="true">
+            android:directBootAware="true"
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+        <service android:name=".LoginFiles.LoginMenuItem.MyServices"/>
     </application>
 
 </manifest>

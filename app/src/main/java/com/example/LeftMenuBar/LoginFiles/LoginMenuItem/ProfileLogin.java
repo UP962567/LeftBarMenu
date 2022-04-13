@@ -28,7 +28,7 @@ import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class SettingsLogin extends Fragment {
+public class ProfileLogin extends Fragment {
 
     static UserLogin U = new UserLogin();
 
@@ -48,7 +48,7 @@ public class SettingsLogin extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-        View view = inflater.inflate(R.layout.activity_settings_login, container, false);
+        View view = inflater.inflate(R.layout.activity_profile_login, container, false);
 
         profileImage = view.findViewById(R.id.PROFILEprofile_image);
         inputUsername1 = view.findViewById(R.id.PROFILEinputUsername);
