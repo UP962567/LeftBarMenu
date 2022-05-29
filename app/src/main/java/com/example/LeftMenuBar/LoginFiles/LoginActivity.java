@@ -26,6 +26,7 @@ import com.example.LeftMenuBar.LoginFiles.LoginMenuItem.ProfileLogin;
 import com.example.LeftMenuBar.LoginFiles.LoginMenuItem.YourFriendLogin;
 import com.example.LeftMenuBar.MainActivity;
 import com.example.LeftMenuBar.R;
+import com.example.LeftMenuBar.Utils.PreferenceManager;
 import com.example.LeftMenuBar.Utils.UserLogin;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -44,6 +45,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class LoginActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final UserLogin U = new UserLogin();
+    private PreferenceManager preferenceManager;
     private DrawerLayout drawer_login;
     TextView UserFullname, UserEmailOrPassword;
     CircleImageView profileImage;
@@ -59,7 +61,14 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        preferenceManager = new PreferenceManager(getApplicationContext());
         hideItem();
+
+        if(preferenceManager.getBoolean(U.User_is_login)){
+            Intent intent = new Intent(getApplicationContext(), DashboardLogin.class);
+            startActivity(intent);
+            finish();
+        }
 
         NavigationView navigationView1 = findViewById(R.id.nav_view_login);
         navigationView1.setNavigationItemSelectedListener(this);
@@ -149,6 +158,7 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
             nav_map.findItem(R.id.nav_share1).setVisible(false);
             nav_map.findItem(R.id.nav_mail1).setVisible(false);
             nav_map.findItem(R.id.nav_mail11).setVisible(false);
+            nav_map.findItem(R.id.login_nav_settings).setVisible(false);
             nav_map.findItem(R.id.nav_mail12).setVisible(false);
             nav_map.findItem(R.id.admin_bar).setTitle("Admin");
             nav_map.findItem(R.id.nav_create_user).setVisible(true);

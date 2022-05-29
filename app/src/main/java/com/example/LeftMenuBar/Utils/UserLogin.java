@@ -9,6 +9,7 @@ public class UserLogin {
     private static String loginNumber;
     private static String loginEmail;
     private static String loginFullname;
+    public static final String User_is_login = "isSignedIn";
 
     String userLogin;
     String passLogin;
