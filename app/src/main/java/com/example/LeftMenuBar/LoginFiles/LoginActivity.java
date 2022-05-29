@@ -15,6 +15,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.example.LeftMenuBar.LoginFiles.Admin.ActivityRoot;
 import com.example.LeftMenuBar.LoginFiles.Admin.CreateUserAdmin;
 import com.example.LeftMenuBar.LoginFiles.LoginMenuItem.ChatListActivity;
 import com.example.LeftMenuBar.LoginFiles.LoginMenuItem.SettingsActivityLogin;
@@ -167,6 +168,7 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
             nav_map.findItem(R.id.nav_share1).setVisible(false);
             nav_map.findItem(R.id.nav_mail1).setVisible(false);
             nav_map.findItem(R.id.nav_mail11).setVisible(false);
+            nav_map.findItem(R.id.nav_root).setVisible(false);
             nav_map.findItem(R.id.admin_bar).setTitle("User");
             nav_map.findItem(R.id.login_nav_settings).setVisible(false);
             nav_map.findItem(R.id.nav_mail12).setVisible(false);
@@ -222,6 +224,9 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
             startActivity(i);
         } else if (id == R.id.nav_create_user) {
             Intent i = new Intent(this, CreateUserAdmin.class);
+            startActivity(i);
+        } else if (id == R.id.nav_root) {
+            Intent i = new Intent(this, ActivityRoot.class);
             startActivity(i);
         }
         drawer_login.closeDrawer(GravityCompat.START);
