@@ -66,6 +66,6 @@ public class SplashScreen extends AppCompatActivity {
             }
         };
         Handler handler = new Handler();
-        handler.postDelayed(runnable, 3000);  // it gives you time to upload the page
+        handler.postDelayed(runnable, 1000);  // it gives you time to upload the page
     }
 }

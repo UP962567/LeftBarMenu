@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
-            android:name=".ActivityRoot"
+            android:name=".LoginFiles.Admin.ActivityRoot"
             android:exported="false" />
         <activity
             android:name=".SplashScreen"
