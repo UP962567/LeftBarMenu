@@ -2,9 +2,10 @@ package com.example.LeftMenuBar.backcode;
 
 public class Users {
 
-    private String country,fullName,gender,phone,profileImage,status,username;
+    private String country,fullName,gender,phone,profileImage,status,username, accessLevel;
+    private long ID_ACC_LEVEL;
 
-    public Users(String country, String fullName, String gender, String phone, String profileImage, String status, String username) {
+    public Users(String country, String fullName, String gender, String phone, String profileImage, String status, String username, String accessLevel, long ID_ACC_LEVEL) {
         this.country = country;
         this.fullName = fullName;
         this.gender = gender;
@@ -12,9 +13,27 @@ public class Users {
         this.profileImage = profileImage;
         this.status = status;
         this.username = username;
+        this.accessLevel = accessLevel;
+        this.ID_ACC_LEVEL = ID_ACC_LEVEL;
     }
 
     public Users() {
+    }
+
+    public String getAccessLevel() {
+        return accessLevel;
+    }
+
+    public void setAccessLevel(String accessLevel) {
+        this.accessLevel = accessLevel;
+    }
+
+    public long getID_ACC_LEVEL() {
+        return ID_ACC_LEVEL;
+    }
+
+    public void setID_ACC_LEVEL(long ID_ACC_LEVEL) {
+        this.ID_ACC_LEVEL = ID_ACC_LEVEL;
     }
 
     public String getCountry() { return country; }
@@ -37,4 +56,6 @@ public class Users {
 
     public String getUsername() { return username; }
     public void setUsername(String username) { this.username = username; }
+
+
 }

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@drawable/first_user_text"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/rootOutPut123"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:background="@color/browser_actions_bg_grey"
+        android:paddingStart="10dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="8dp"
+        android:paddingBottom="10dp"
+        android:text="RootOutPuts"
+        android:textColor="@color/black"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_default="wrap" />
+
+    <TextView
+        android:id="@+id/rootOutPut1234"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:background="@color/cardview_dark_background"
+        android:paddingStart="10dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="8dp"
+        android:paddingBottom="10dp"
+        android:text="RootOutPuts1234"
+        android:textColor="#BCAAA4"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintStart_toStartOf="@+id/rootTime"
+        app:layout_constraintTop_toBottomOf="@+id/rootTime"
+        app:layout_constraintWidth_default="wrap" />
+
+    <TextView
+        android:id="@+id/rootTime"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:text="Time"
+        app:layout_constraintStart_toStartOf="@+id/rootOutPut123"
+        app:layout_constraintTop_toBottomOf="@+id/rootOutPut123" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

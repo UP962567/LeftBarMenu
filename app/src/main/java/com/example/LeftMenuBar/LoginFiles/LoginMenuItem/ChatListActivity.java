@@ -1,6 +1,7 @@
 package com.example.LeftMenuBar.LoginFiles.LoginMenuItem;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -57,6 +59,7 @@ public class ChatListActivity extends androidx.fragment.app.Fragment {
         Query query = mRef.child(mAuth.getUid()).orderByChild("username").startAt(s).endAt(s+"\uf8ff");
         options= new FirebaseRecyclerOptions.Builder<Friend>().setQuery(query,Friend.class).build();
         adapter= new FirebaseRecyclerAdapter<Friend, ZzFriendViewHolder>(options) {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             protected void onBindViewHolder(@NonNull ZzFriendViewHolder holder, int position, @NonNull Friend model) {
                 Picasso.get().load(model.getProfileImageURL()).into(holder.profileImageURL);

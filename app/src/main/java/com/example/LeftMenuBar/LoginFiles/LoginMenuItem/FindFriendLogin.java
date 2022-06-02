@@ -31,10 +31,12 @@ public class FindFriendLogin extends Fragment {
     FirebaseRecyclerOptions<Users> options;
     FirebaseRecyclerAdapter<Users, ZzFindFriendViewHolder> adapter;
 
-    DatabaseReference mUserRef;
+    DatabaseReference mUserRef, mFriendRef;
     FirebaseAuth mAuth;
     FirebaseUser mUser;
     RecyclerView recyclerView;
+
+    String userID;
 
     ConstraintLayout constraintLayout;
 
@@ -51,23 +53,30 @@ public class FindFriendLogin extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         mUserRef = FirebaseDatabase.getInstance().getReference().child("Users");
+        mFriendRef = FirebaseDatabase.getInstance().getReference().child("Friends");
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
 
-        LoadUsers();
+
+        LoadUsers("");
 
         return view;
     }
 
+    // !mFriendRef.child(mUser.getUid()).orderByChild("username").equals(mUserRef.orderByChild("username"))
+    // !mUserRef.getKey().equals(mFriendRef.child(mUser.getUid()).getKey())
+    // !query.equals(mFriendRef.child(mUser.getUid()).getKey())
 
-
-    private void LoadUsers() {
+    private void LoadUsers(String s) {
         Query query = mUserRef.orderByChild("username").startAt("").endAt("" +"\uf8ff");
+        Query query1 = mFriendRef.child(mAuth.getUid()).orderByChild("username").startAt(s).endAt(s+"\uf8ff");
+        
         options= new FirebaseRecyclerOptions.Builder<Users>().setQuery(query, Users.class).build();
         adapter= new FirebaseRecyclerAdapter<Users, ZzFindFriendViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull ZzFindFriendViewHolder holder, int position, @NonNull Users model) {
-                if (!mUser.getUid().equals(getRef(position).getKey())) {
+                if (!mUser.getUid().equals(getRef(position).getKey())
+                        && !query.equals(query1) ) {
                     Picasso.get().load(model.getProfileImage()).into(holder.circleImageView);
                     holder.username.setText(model.getUsername());
                     //holder.gender.setText("Male");

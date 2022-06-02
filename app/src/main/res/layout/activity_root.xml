@@ -10,10 +10,10 @@
         android:id="@+id/rootBT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Root"
+        android:layout_marginTop="24dp"
+        android:text="Read"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.272"
+        app:layout_constraintHorizontal_bias="0.114"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -21,32 +21,79 @@
         android:id="@+id/rootBT2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Root"
+        android:text="Send"
         app:layout_constraintBottom_toBottomOf="@+id/rootBT"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.739"
+        app:layout_constraintHorizontal_bias="0.671"
         app:layout_constraintStart_toEndOf="@+id/rootBT"
-        app:layout_constraintTop_toTopOf="@+id/rootBT" />
+        app:layout_constraintTop_toTopOf="@+id/rootBT"
+        app:layout_constraintVertical_bias="1.0" />
 
     <EditText
         android:id="@+id/rootTextReader"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:ellipsize="end"
         android:ems="10"
         android:gravity="top|start"
         android:inputType="textMultiLine"
         android:lines="4"
-        android:ellipsize="end"
-        android:singleLine="false"
+        android:minHeight="48dp"
         android:minLines="1"
-        android:textColor="@color/teal_200"
         android:overScrollMode="always"
         android:scrollbarStyle="insideInset"
         android:scrollbars="vertical"
+        android:singleLine="false"
         android:text="Name"
+        android:textColor="@color/teal_200"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rootBT" />
+
+    <EditText
+        android:id="@+id/rootCommand"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:ems="10"
+        android:gravity="top|start"
+        android:hint="Send Command"
+        android:inputType="textMultiLine"
+        android:lines="4"
+        android:minHeight="48dp"
+        android:minLines="1"
+        android:overScrollMode="always"
+        android:scrollbarStyle="insideInset"
+        android:scrollbars="vertical"
+        android:singleLine="false"
+        android:textColor="@color/teal_200"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rootTextReader" />
+
+    <Button
+        android:id="@+id/rootBT3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Send Read Command"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.451"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rootCommand" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycleViewReadRoot"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rootBT3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

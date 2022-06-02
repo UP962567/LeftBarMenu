@@ -126,7 +126,8 @@ public class NewsLogin extends Fragment {
             inputAddPost1.setFocusable(false);
             inputAddPost1.setFocusableInTouchMode(false);
 
-        } else if (level == 2) {
+        }
+        else if (level == 2) {
             constraintLayout5.setVisibility(View.VISIBLE);
             addPostImageView1.setVisibility(View.VISIBLE);
             sendPostImageView1.setVisibility(View.VISIBLE);
@@ -210,7 +211,7 @@ public class NewsLogin extends Fragment {
                 holder.postDesc.setText(model.getPostText());
                 final String timeAgo = calculateTimeAgo(model.getDate());
                 holder._profileTimePosted.setText(timeAgo);
-                holder.username.setText("Admin");
+                holder.username.setText("News Adm");
                 Picasso.get().load(model.getImagePost()).into(holder.postImage);
                 //Picasso.get().load(model.getUserProfileImage()).into(holder.profileImage);
                 holder.countLikes(postKey,mUser.getUid(), lRef);
